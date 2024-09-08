@@ -9,7 +9,7 @@ const FilterFM = () => {
   const { year, setYear, month, setMonth } =
     useStore() as CalendarState & CalendarAction;
   return (
-    <div className="flex justify-between mt-4 mx-12">
+    <div className="flex justify-between mt-4">
       <Input label={"Year"} name={"year"} value={year} onClickFn={setYear} />
       <Dropdown
         label="Month"

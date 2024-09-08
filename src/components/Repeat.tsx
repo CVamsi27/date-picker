@@ -1,34 +1,55 @@
 "use client";
 import { RepeatFrequency } from "@/utils";
-import CustomRepeatModal from "./CustomRepeatModal";
 import useStore from "@/store";
 import { CalendarAction, CalendarState } from "@/types";
+import Dropdown from "./ui/Dropdown";
+import Button from "./ui/Button";
+import CloseButton from "./ui/CloseButton";
 
 const Repeat = () => {
-  const { setIsCustomModalOpen } = useStore() as CalendarState & CalendarAction;
+  const {
+    setIsCustomModalOpen,
+    setIsCustomRepeat,
+    isCustomRepeat,
+    repeatFrequency,
+    setRepeatFrequency,
+  } = useStore() as CalendarState & CalendarAction;
   return (
-    <div className="flex gap-2 mx-12">
-      <label htmlFor="repeat" className="font-medium">
-        Repeat :
-      </label>
-      <select
+    <div className="flex justify-between mt-3">
+      <Dropdown
+        label="Repeat"
         name="repeat"
-        id="repeat"
-        defaultValue="No Repeat"
-        className="bg-slate-200 px-2 rounded-md"
-        onChange={(e) => {
+        defaultValue={repeatFrequency}
+        onChangeFn={(e) => {
           if (e.target.value === "Custom") {
             setIsCustomModalOpen(true);
+            setIsCustomRepeat(true);
           }
+          setRepeatFrequency(e.target.value);
         }}
-      >
-        {RepeatFrequency.map((iRepeat) => (
-          <option key={iRepeat} value={iRepeat}>
-            {iRepeat}
-          </option>
-        ))}
-      </select>
-      <CustomRepeatModal />
+        itemsArray={RepeatFrequency}
+      />
+      {isCustomRepeat ? (
+        <div className="flex gap-1">
+          <Button
+            name="View Custom"
+            onClickFn={(e) => setIsCustomModalOpen(true)}
+          />
+          <CloseButton
+            setCloseFunction={() => {
+              setIsCustomRepeat(false);
+              setRepeatFrequency("No Repeat");
+            }}
+          />
+        </div>
+      ) : (
+        <CloseButton
+            setCloseFunction={() => {
+              setIsCustomRepeat(false);
+              setRepeatFrequency("No Repeat");
+            }}
+          />
+      )}
     </div>
   );
 };

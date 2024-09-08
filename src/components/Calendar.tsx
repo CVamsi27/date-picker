@@ -1,3 +1,4 @@
+import CustomRepeatModal from "./CustomRepeatModal";
 import DateDisplay from "./DateDisplay";
 import FilterFM from "./FilterFM";
 import Repeat from "./Repeat";
@@ -8,6 +9,7 @@ const Calendar = () => {
       <FilterFM />
       <DateDisplay />
       <Repeat />
+      <CustomRepeatModal />
     </div>
   );
 };

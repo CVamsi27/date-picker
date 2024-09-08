@@ -21,7 +21,9 @@ const DateDisplay = () => {
         <button
           key={iDate}
           className={`p-2 rounded-full font-medium text-center ${
-            iDate === date ? "bg-black text-slate-200" : "bg-slate-200"
+            iDate === date
+              ? "bg-black text-slate-200 hover:bg-gray-800"
+              : "bg-slate-200 hover:bg-slate-300"
           }`}
           style={iDate == 1 ? { gridColumnStart: day } : undefined}
           onClick={() => setDate(iDate)}
